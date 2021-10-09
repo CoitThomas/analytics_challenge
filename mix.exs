@@ -20,7 +20,9 @@ defmodule AnalyticsChallenge.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:ecto_sql, "~> 3.5"},
+      {:postgrex, "~> 0.15"}
     ]
   end
 end
