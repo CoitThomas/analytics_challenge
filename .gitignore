@@ -25,3 +25,6 @@ analytics_challenge-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# Ignore database data
+/postgres-data/
