@@ -1,6 +1,6 @@
-defmodule AnalyticsChallenge.ImportPagecounts do
+defmodule AnalyticsChallenge.Import do
   @moduledoc """
-  Responsible for loading the pagecount data set into the database.
+  Responsible for fetching the pagecount data set from wikipedia.
   """
   @base_url Application.compile_env(:analytics_challenge, :pagecounts_base_url)
 
