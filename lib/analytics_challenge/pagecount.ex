@@ -8,8 +8,8 @@ defmodule AnalyticsChallenge.Pagecount do
   @type t :: %__MODULE__{}
 
   schema "pagecounts" do
-    field(:language_code)
-    field(:page_name)
+    field(:language_code, :string)
+    field(:page_name, :string)
     field(:view_count, :integer)
     field(:year, :integer)
     field(:month, :integer)
