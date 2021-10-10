@@ -2,6 +2,7 @@ defmodule AnalyticsChallenge.ImportPagecounts do
   @moduledoc """
   Responsible for loading the pagecount data set into the database.
   """
+  @base_url Application.compile_env(:analytics_challenge, :pagecounts_base_url)
 
   @doc """
   Utilizes an HTTP client to access the pagecount data from the web and bring it into memory.
@@ -13,7 +14,7 @@ defmodule AnalyticsChallenge.ImportPagecounts do
   end
 
   defp build_url(year, month, day, hour) do
-    "https://dumps.wikimedia.org/other/pagecounts-raw/#{year}/#{year}-#{month}/pagecounts-#{year}#{month}#{day}-#{hour}0000.gz"
+    "#{@base_url}/#{year}/#{year}-#{month}/pagecounts-#{year}#{month}#{day}-#{hour}0000.gz"
   end
 
   defp decompress(zipped_data) do
