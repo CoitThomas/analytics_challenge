@@ -14,6 +14,7 @@ defmodule AnalyticsChallenge.Pagecount do
     field(:year, :integer)
     field(:month, :integer)
     field(:day, :integer)
+    field(:hour, :integer)
   end
 
   def changeset(pagecount, attrs) do
@@ -28,5 +29,6 @@ defmodule AnalyticsChallenge.Pagecount do
     |> validate_inclusion(:year, 2007..2016)
     |> validate_inclusion(:month, 1..12)
     |> validate_inclusion(:day, 1..31)
+    |> validate_inclusion(:hour, 0..23)
   end
 end

@@ -9,6 +9,7 @@ defmodule AnalyticsChallenge.Repo.Migrations.AddPagecountsTable do
       add :year, :integer
       add :month, :integer
       add :day, :integer
+      add :hour, :integer
     end
 
     create unique_index(:pagecounts, [:language_code, :page_name], name: :wiki_page)
