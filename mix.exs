@@ -22,7 +22,8 @@ defmodule AnalyticsChallenge.MixProject do
     [
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ecto_sql, "~> 3.5"},
-      {:postgrex, "~> 0.15"}
+      {:postgrex, "~> 0.15"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 end
