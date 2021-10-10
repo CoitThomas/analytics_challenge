@@ -20,6 +20,7 @@ defmodule AnalyticsChallenge.Pagecount do
     pagecount
     |> cast(attrs, [:language_code, :page_name, :view_count, :year, :month, :day])
     |> validate_required([:language_code, :page_name, :view_count])
+    |> unique_constraint(:no_dup_wiki_pages, name: :wiki_page)
     # ISO 639-1s are length 2, ISO 639-2s are length 3
     |> validate_length(:language_code, min: 2, max: 3)
     |> validate_number(:view_count, greater_than: 0)
