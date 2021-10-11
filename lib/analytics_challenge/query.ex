@@ -10,16 +10,16 @@ defmodule AnalyticsChallenge.Query do
   @doc """
   Returns the number of rows that currently exist in the pagecounts table.
   """
-  @spec row_count() :: pos_integer
-  def row_count() do
-    Repo.one(from p in Pagecount, select: count(p.id))
+  @spec row_count :: pos_integer
+  def row_count do
+    Repo.one(from(p in Pagecount, select: count(p.id)))
   end
 
   @doc """
   Returns all the unique language codes that exist in the pagecounts table.
   """
-  @spec unique_language_codes() :: list(String.t())
-  def unique_language_codes() do
+  @spec unique_language_codes :: list(String.t())
+  def unique_language_codes do
     Repo.all(from(p in Pagecount, select: p.language_code, distinct: p.language_code))
   end
 
