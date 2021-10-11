@@ -3,8 +3,8 @@ defmodule AnalyticsChallenge.Repo.Migrations.AddPagecountsTable do
 
   def change do
     create table(:pagecounts) do
-      add :language_code, :string, size: 3
-      add :page_name, :string
+      add :language_code, :string
+      add :page_name, :text
       add :view_count, :integer
       add :year, :integer
       add :month, :integer
