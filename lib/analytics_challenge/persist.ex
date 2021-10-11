@@ -32,6 +32,10 @@ defmodule AnalyticsChallenge.Persist do
 
   # TODO: add hour tuple parameter for 'any arbitrary hour'
   defp convert_to_map([language_code, page_name, view_count, _]) do
-    %{language_code: language_code, page_name: page_name, view_count: String.to_integer(view_count)}
+    %{
+      language_code: language_code,
+      page_name: page_name,
+      view_count: String.to_integer(view_count)
+    }
   end
 end
