@@ -29,7 +29,15 @@ defmodule AnalyticsChallenge.Persist do
   end
 
   defp valid_raw_pagecount?([language_code, page_name, _, _]) do
-    !String.contains?(language_code, ".") && !String.contains?(page_name, ":")
+    valid_language_code?(language_code) && valid_page_name?(page_name)
+  end
+
+  defp valid_language_code?(language_code) do
+    !String.contains?(language_code, ".")
+  end
+
+  defp valid_page_name?(page_name) do
+    !String.contains?(page_name, ":") && String.length(String.trim page_name) != 0
   end
 
   # TODO: add hour tuple parameter for 'any arbitrary hour'
