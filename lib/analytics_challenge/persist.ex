@@ -35,7 +35,7 @@ defmodule AnalyticsChallenge.Persist do
   end
 
   defp valid_page_name?(page_name) do
-    !String.contains?(page_name, ":") && String.length(String.trim page_name) != 0
+    !String.contains?(page_name, ":") && String.length(String.trim(page_name)) != 0
   end
 
   # TODO: add hour tuple parameter for 'any arbitrary hour'
