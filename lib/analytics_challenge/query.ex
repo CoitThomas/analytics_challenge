@@ -1,6 +1,6 @@
 defmodule AnalyticsChallenge.Query do
   @moduledoc """
-  X
+  Contains all the queries used for retrieving data from postgres.
   """
 
   import Ecto.Query

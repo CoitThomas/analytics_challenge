@@ -1,6 +1,6 @@
 defmodule AnalyticsChallenge.Pagecount do
   @moduledoc """
-  This module defines the schema and changeset function for operating on the pagecounts table with Ecto
+  This module defines the schema and changeset function for operating on the pagecounts table with Ecto.
   """
   use Ecto.Schema
   import Ecto.Changeset
