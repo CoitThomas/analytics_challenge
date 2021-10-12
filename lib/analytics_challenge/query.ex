@@ -26,12 +26,14 @@ defmodule AnalyticsChallenge.Query do
   @doc """
   Returns the top ten page name's with the most views for a given language code.
   """
-  @spec top_ten_by_language(String.t()) :: list(list(String.t() | pos_integer))
-  def top_ten_by_language(language_code) do
+  @spec top_ten_for_language_at_hour(String.t(), NaiveDateTime.t()) ::
+          list(list(String.t() | pos_integer))
+  def top_ten_for_language_at_hour(language_code, datetime) do
     Repo.all(
       from(p in Pagecount,
         select: [p.language_code, p.page_name, p.view_count],
         where: p.language_code == ^language_code,
+        where: p.when_viewed == ^datetime,
         order_by: [desc: p.view_count],
         limit: 10
       )

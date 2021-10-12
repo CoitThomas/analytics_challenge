@@ -6,12 +6,13 @@ defmodule AnalyticsChallenge.Repo.Migrations.AddPagecountsTable do
       add :language_code, :string
       add :page_name, :text
       add :view_count, :integer
-      add :year, :integer
-      add :month, :integer
-      add :day, :integer
-      add :hour, :integer
+      add :when_viewed, :naive_datetime
     end
 
-    create unique_index(:pagecounts, [:language_code, :page_name], name: :wiki_page)
+    create unique_index(
+      :pagecounts,
+      [:language_code, :page_name, :when_viewed],
+      name: :wiki_page_hourly_views
+    )
   end
 end

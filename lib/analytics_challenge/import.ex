@@ -5,6 +5,9 @@ defmodule AnalyticsChallenge.Import do
 
   @doc """
   Utilizes an HTTP client to access the pagecount data from the web and bring it into memory.
+
+  The date_and_hour tuple argument should contain 4 strings and be in the form: {YYYY, MM, DD, HH}
+  e.g. -> {"2015", "08", "25", "18"}
   """
   @spec by_date_and_hour(String.t(), tuple) :: list(String.t())
   def by_date_and_hour(base_url, date_and_hour) do
