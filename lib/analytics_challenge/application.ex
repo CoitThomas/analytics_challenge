@@ -6,7 +6,8 @@ defmodule AnalyticsChallenge.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {AnalyticsChallenge.Repo, []}
+      AnalyticsChallenge.Repo,
+      AnalyticsChallenge.Loader
     ]
 
     opts = [strategy: :one_for_one, name: AnalyticsChallenge.Supervisor]
