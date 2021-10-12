@@ -7,7 +7,9 @@ config :analytics_challenge,
     db_insertion_batch_size: 10000
   ],
   writer: [
-    analytics_dir_name: "analytics"
+    output_dir_name: "analytics",
+    output_file_descr: "top_ten_pagecounts_per_language",
+    output_file_type: "csv"
   ]
 
 config :analytics_challenge, AnalyticsChallenge.Repo,

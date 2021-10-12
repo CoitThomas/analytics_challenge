@@ -39,13 +39,12 @@ defmodule AnalyticsChallenge.Persist do
   end
 
   @doc """
-  Constructs a filename based off of the description, extracted info from the provided
+  Constructs a path to a file. The filename is based off of the description, extracted info from the provided
   NaiveDatetime, and desired file type.
   """
-  @spec build_filename(String.t(), NaiveDatetime.t(), String.t()) :: String.t()
-  def build_filename(descr, when_viewed, file_ext) do
-    {year, month, day, hour} = NaiveDatetimeSupport.parse_to_strings(when_viewed)
-    "#{descr}-#{year}#{month}#{day}-#{hour}0000.#{file_ext}"
+  @spec build_file_path(String.t(), String.t(), NaiveDatetime.t(), String.t()) :: String.t()
+  def build_file_path(dir_name, file_descr, when_viewed, file_ext) do
+    Path.join([dir_name, build_filename(file_descr, when_viewed, file_ext)])
   end
 
   defp prep_for_postgres(raw_pagecounts, when_viewed) do
@@ -94,5 +93,10 @@ defmodule AnalyticsChallenge.Persist do
     content
     |> CSV.encode()
     |> Enum.each(&IO.write(file, &1))
+  end
+
+  defp build_filename(descr, when_viewed, file_ext) do
+    {year, month, day, hour} = NaiveDatetimeSupport.parse_to_strings(when_viewed)
+    "#{descr}-#{year}#{month}#{day}-#{hour}0000.#{file_ext}"
   end
 end
