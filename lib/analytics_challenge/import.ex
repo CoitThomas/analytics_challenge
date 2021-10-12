@@ -4,18 +4,20 @@ defmodule AnalyticsChallenge.Import do
   """
 
   @doc """
-  Utilizes an HTTP client to access the pagecount data from the web and bring it into memory.
-
-  The date_and_hour tuple argument should contain 4 strings and be in the form: {YYYY, MM, DD, HH}
-  e.g. -> {"2015", "08", "25", "18"}
+  Utilizes an HTTP client to access the pagecount historical data for a specified hour in the past.
   """
-  @spec by_date_and_hour(String.t(), tuple) :: list(String.t())
-  def by_date_and_hour(base_url, date_and_hour) do
-    %HTTPoison.Response{body: body} = HTTPoison.get!(build_url(base_url, date_and_hour))
+  @spec raw_pagecounts(String.t(), NaiveDatetime.t()) :: list(String.t())
+  def raw_pagecounts(base_url, when_viewed) do
+    %HTTPoison.Response{body: body} = HTTPoison.get!(build_url(base_url, when_viewed))
     decompress(body)
   end
 
-  defp build_url(base_url, {year, month, day, hour} = _date_and_hour) do
+  defp build_url(base_url, when_viewed) do
+    year = Integer.to_string(when_viewed.year)
+    month = to_padded_string(when_viewed.month)
+    day = to_padded_string(when_viewed.day)
+    hour = to_padded_string(when_viewed.hour)
+
     "#{base_url}/#{year}/#{year}-#{month}/pagecounts-#{year}#{month}#{day}-#{hour}0000.gz"
   end
 
@@ -23,5 +25,11 @@ defmodule AnalyticsChallenge.Import do
     zipped_data
     |> :zlib.gunzip()
     |> String.split("\n", trim: true)
+  end
+
+  defp to_padded_string(integer) do
+    integer
+    |> Integer.to_string()
+    |> String.pad_leading(2, "0")
   end
 end
