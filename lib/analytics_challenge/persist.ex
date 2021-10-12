@@ -5,15 +5,13 @@ defmodule AnalyticsChallenge.Persist do
   alias AnalyticsChallenge.Pagecount
   alias AnalyticsChallenge.Repo
 
-  @batch_size Application.compile_env(:analytics_challenge, :db_insertion_batch_size)
-
   @doc """
   X
   """
-  @spec to_postgres(list(map)) :: :ok
-  def to_postgres(pagecount_maps) do
+  @spec to_postgres(list(map), pos_integer) :: :ok
+  def to_postgres(pagecount_maps, batch_size) do
     pagecount_maps
-    |> Enum.chunk_every(@batch_size)
+    |> Enum.chunk_every(batch_size)
     |> Enum.each(fn batch -> Repo.insert_all(Pagecount, batch) end)
   end
 
