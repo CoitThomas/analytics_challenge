@@ -31,6 +31,11 @@ defmodule AnalyticsChallenge.Writer do
     GenServer.call(__MODULE__, {:top_ten_for_all_at_hour, date_and_hour})
   end
 
+  @spec top_ten_for_subset_at_hour(list(String.t()), NaiveDatetime.t()) :: atom
+  def top_ten_for_subset_at_hour(language_codes, date_and_hour) do
+    GenServer.call(__MODULE__, {:top_ten_for_subset_at_hour, language_codes, date_and_hour})
+  end
+
   # Callbacks
   @spec init(list) :: {:ok, list}
   def init(config) do
@@ -51,6 +56,26 @@ defmodule AnalyticsChallenge.Writer do
 
     response =
       Query.unique_language_codes()
+      |> Enum.map(fn code -> Query.top_ten_for_language_at_hour(code, date_and_hour) end)
+      |> Persist.to_csv(path)
+
+    {:reply, response, config}
+  end
+
+  @spec handle_call({atom, NaiveDatetime.t()}, GenServer.from(), list) :: {:reply, atom, list}
+  def handle_call({:top_ten_for_subset_at_hour, language_codes, date_and_hour}, _from, config) do
+    description = "top_ten_for_language_codes_subset"
+
+    path =
+      Persist.build_file_path(
+        config[:dir_name],
+        description,
+        date_and_hour,
+        config[:file_type]
+      )
+
+    response =
+      language_codes
       |> Enum.map(fn code -> Query.top_ten_for_language_at_hour(code, date_and_hour) end)
       |> Persist.to_csv(path)
 
