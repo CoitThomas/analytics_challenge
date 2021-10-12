@@ -31,7 +31,7 @@ defmodule AnalyticsChallenge.Loader do
   end
 
   # Callbacks
-  @spec init(map) :: {:ok, map}
+  @spec init(list) :: {:ok, list}
   def init(config) do
     {:ok, config}
   end
@@ -40,8 +40,8 @@ defmodule AnalyticsChallenge.Loader do
   def handle_call({:load_pagecounts_for_hour, date_and_hour}, _from, config) do
     response =
       config[:base_url]
-      |> AnalyticsChallenge.Import.raw_pagecounts(date_and_hour)
-      |> AnalyticsChallenge.Persist.to_postgres(date_and_hour, config[:batch_size])
+      |> Import.raw_pagecounts(date_and_hour)
+      |> Persist.to_postgres(date_and_hour, config[:batch_size])
 
     {:reply, response, config}
   end

@@ -8,7 +8,6 @@ config :analytics_challenge,
   ],
   writer: [
     dir_name: "analytics",
-    file_descr: "top_ten_pagecounts_per_language",
     file_type: "csv"
   ]
 
