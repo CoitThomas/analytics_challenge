@@ -5,6 +5,9 @@ config :analytics_challenge,
   loader: [
     pagecounts_base_url: "https://dumps.wikimedia.org/other/pagecounts-raw",
     db_insertion_batch_size: 10000
+  ],
+  writer: [
+    analytics_dir_name: "analytics"
   ]
 
 config :analytics_challenge, AnalyticsChallenge.Repo,
