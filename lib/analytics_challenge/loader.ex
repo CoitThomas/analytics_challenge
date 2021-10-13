@@ -27,7 +27,7 @@ defmodule AnalyticsChallenge.Loader do
 
   @spec load_pagecounts_for_hour(NaiveDatetime.t()) :: atom
   def load_pagecounts_for_hour(date_and_hour) do
-    GenServer.call(__MODULE__, {:load_pagecounts_for_hour, date_and_hour})
+    GenServer.call(__MODULE__, {:load_pagecounts_for_hour, date_and_hour}, :infinity)
   end
 
   # Callbacks

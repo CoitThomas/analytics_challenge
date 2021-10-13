@@ -28,12 +28,12 @@ defmodule AnalyticsChallenge.Writer do
 
   @spec top_ten_for_all_at_hour(NaiveDatetime.t()) :: atom
   def top_ten_for_all_at_hour(date_and_hour) do
-    GenServer.call(__MODULE__, {:top_ten_for_all_at_hour, date_and_hour})
+    GenServer.call(__MODULE__, {:top_ten_for_all_at_hour, date_and_hour}, :infinity)
   end
 
   @spec top_ten_for_subset_at_hour(list(String.t()), NaiveDatetime.t()) :: atom
   def top_ten_for_subset_at_hour(language_codes, date_and_hour) do
-    GenServer.call(__MODULE__, {:top_ten_for_subset_at_hour, language_codes, date_and_hour})
+    GenServer.call(__MODULE__, {:top_ten_for_subset_at_hour, language_codes, date_and_hour}, :infinity)
   end
 
   # Callbacks
