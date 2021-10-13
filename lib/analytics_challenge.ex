@@ -1,18 +1,3 @@
 defmodule AnalyticsChallenge do
-  @moduledoc """
-  Documentation for `AnalyticsChallenge`.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> AnalyticsChallenge.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  @moduledoc File.read!(Path.expand("../README.md", __DIR__))
 end
