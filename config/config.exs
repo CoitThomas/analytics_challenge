@@ -11,8 +11,4 @@ config :analytics_challenge,
     file_type: "csv"
   ]
 
-config :analytics_challenge, AnalyticsChallenge.Repo,
-  database: "analytics_challenge_postgres_1",
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost"
+import_config "#{config_env()}.exs"
