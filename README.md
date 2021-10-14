@@ -10,7 +10,9 @@ lanuage, for any arbitrary date and hour chosen.
 ***NOTE***: Although it is possible to fetch the pagecount data for an arbitrary date and hour, it
 is only possible to fetch a data set for an arbitrary date and hour within a fixed range determined
 by Wikipedia. That range is as follows:
-`~N[2007-12-09 18:00:00] - ~N[2016-08-05 12:00:00]`
+
+    ~N[2007-12-09 18:00:00] - ~N[2016-08-05 12:00:00]
+
 Or if you prefer: 6:00 PM December 9, 2007 - 12:00 PM August 5, 2016
 
 ## Getting Started
@@ -21,19 +23,25 @@ You will need to make sure that the following prerequisites are installed on you
 
 ### Setup Instructions
 
-1. Clone this repo
-2. Get your dependencies:
-   `mix deps.get`
-3. Build, create, start, and attach to the Docker container that houses a PostgreSQL database:
-   `docker-compose up -d`
-4. Create the storage for the AnalyticsChallenge.Repo and run the migrations for your database:
-   `mix ecto.create`
-   `mix ecto.migrate`
+Clone the repo
+Get your dependencies:
+
+    mix deps.get
+
+Build, create, start, and attach to the Docker container that houses a PostgreSQL database:
+
+    docker-compose up -d
+
+Create the storage for the AnalyticsChallenge.Repo and run the migrations for your database:
+
+    mix ecto.create
+    mix ecto.migrate
 
 ### Tests
 
 For testing, run the following command:
-   `mix test`
+
+    mix test
 
 ## Architecture
 
@@ -44,6 +52,7 @@ AnalyticsChallenge is an OTP Elixir application with the following supervision t
 ### Usage
 
 First, let's open an iex session which will get the application up and running:
+
     iex -S mix
 
 ---
