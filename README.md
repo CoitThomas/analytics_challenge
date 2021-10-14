@@ -19,17 +19,19 @@ Or if you prefer: 6:00 PM December 9, 2007 - 12:00 PM August 5, 2016
 ## Getting Started
 
 You will need to make sure that the following prerequisites are installed on your local machine:
+- Third item
+    - Indented item
 - Elixir 1.11.4 (compiled with Erlang/OTP 23) or higher
- - [macOS](https://elixir-lang.org/install.html#macos)
- - [Windows](https://elixir-lang.org/install.html#windows)
- - [GNU/Linux](https://elixir-lang.org/install.html#gnulinux) 
+    - [macOS](https://elixir-lang.org/install.html#macos)
+    - [Windows](https://elixir-lang.org/install.html#windows)
+    - [GNU/Linux](https://elixir-lang.org/install.html#gnulinux) 
 - Docker/Docker Compose
- - On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is included as part of those desktop installs. On Linux systems, you'll need to install Docker and Docker Compose seperately.
-  - [macOS](https://docs.docker.com/desktop/mac/install/)
-  - [Windows](https://docs.docker.com/desktop/windows/install/)
-  - GNU/Linux:
-   - [Docker](https://docs.docker.com/engine/install/)
-   - [Docker Compose](https://docs.docker.com/compose/install/) (alternatively, `sudo apt-get docker-compose`)
+    - On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is included as part of those desktop installs. On Linux systems, you'll need to install Docker and Docker Compose seperately.
+        - [macOS](https://docs.docker.com/desktop/mac/install/)
+        - [Windows](https://docs.docker.com/desktop/windows/install/)
+        - GNU/Linux:
+            - [Docker](https://docs.docker.com/engine/install/)
+            - [Docker Compose](https://docs.docker.com/compose/install/) (alternatively, `sudo apt-get docker-compose`)
 
 ### Setup Instructions
 
