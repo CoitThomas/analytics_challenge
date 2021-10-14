@@ -33,7 +33,11 @@ defmodule AnalyticsChallenge.Writer do
 
   @spec top_ten_for_subset_at_hour(list(String.t()), NaiveDatetime.t()) :: atom
   def top_ten_for_subset_at_hour(language_codes, date_and_hour) do
-    GenServer.call(__MODULE__, {:top_ten_for_subset_at_hour, language_codes, date_and_hour}, :infinity)
+    GenServer.call(
+      __MODULE__,
+      {:top_ten_for_subset_at_hour, language_codes, date_and_hour},
+      :infinity
+    )
   end
 
   # Callbacks

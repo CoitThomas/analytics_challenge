@@ -36,7 +36,7 @@ defmodule AnalyticsChallenge.MixProject do
 
   defp aliases do
     [
-     test: ["ecto.create", "ecto.migrate", "test"]
+      test: ["ecto.create", "ecto.migrate", "test"]
     ]
   end
 end

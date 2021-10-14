@@ -9,6 +9,7 @@ defmodule AnalyticsChallenge.Query do
 
   @doc """
   Returns the number of rows that currently exist in the pagecounts table.
+  Used namely for spot checks and testing purposes.
   """
   @spec row_count :: pos_integer
   def row_count do
@@ -24,7 +25,7 @@ defmodule AnalyticsChallenge.Query do
   end
 
   @doc """
-  Returns the top ten page name's with the most views for a given language code.
+  Returns the top ten page names with the most views for a given language code.
   """
   @spec top_ten_for_language_at_hour(String.t(), NaiveDateTime.t()) ::
           list(list(String.t() | pos_integer))
