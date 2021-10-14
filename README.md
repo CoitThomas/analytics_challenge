@@ -20,7 +20,16 @@ Or if you prefer: 6:00 PM December 9, 2007 - 12:00 PM August 5, 2016
 
 You will need to make sure that the following prerequisites are installed on your local machine:
 - Elixir 1.11.4 (compiled with Erlang/OTP 23) or higher
-- Docker
+ * [macOS](https://elixir-lang.org/install.html#macos)
+ * [Windows](https://elixir-lang.org/install.html#windows)
+ * [GNU/Linux](https://elixir-lang.org/install.html#gnulinux) 
+- Docker/Docker Compose
+ * On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is included as part of those desktop installs. On Linux systems, you'll need to install Docker and Docker Compose seperately.
+  + [macOS](https://docs.docker.com/desktop/mac/install/)
+  + [Windows](https://docs.docker.com/desktop/windows/install/)
+  + GNU/Linux:
+   - [Docker](https://docs.docker.com/engine/install/)
+   - [Docker Compose](https://docs.docker.com/compose/install/) (alternatively, `sudo apt-get docker-compose`)
 
 ### Setup Instructions
 
@@ -47,17 +56,27 @@ For testing, run the following command:
 
 ## Architecture
 
+### Supervision Tree
+
 AnalyticsChallenge is an OTP Elixir application with the following supervision tree:
 
 ![AnalyticsChallenge Supervision Tree](https://github.com/CoitThomas/analytics_challenge/blob/master/images/supervision_tree.png)
 
-**AnalyticsChallenge.Loader**: Makes HTTP requests to Wikipedia for the raw pagecounts data, processes the data, and loads it into the database.
+**AnalyticsChallenge.Loader**: GenServer child process which makes HTTP requests to Wikipedia for the raw pagecounts data, processes the data, and loads it into the database.
 
-**AnalyticsChallenge.Repo**: Runs, maintains, and interacts with the database.
+**AnalyticsChallenge.Repo**: Child process that runs, maintains, and interacts with the database. This happens by way of the Postgres Ecto adaptor and Postgrex.
 
-**AnalyticsChallenge.Writer**: Queries the database and writes the data out to a CSV file.
+**AnalyticsChallenge.Writer**: GenServer child process which queries the database and writes the data out to a CSV file. There are currently 2 queries that it can run.
 
-### Usage
+### Database Schema
+
+This is a pretty simple schema composed of one table, `pagecounts`, which has the following columns and data types:
+
+![Pagecounts Table](https://github.com/CoitThomas/analytics_challenge/blob/master/images/pagecounts_table.png)
+
+It's worth noting that a `when_viewed` column of type timestamp w/out time zone (NaiveDatetime in Elixir) has been included along with a unique index that covers the `language_code`, `page_name`, and `when_viewed` columns. The hope here was to be able to store more than just a single hour in our database for the same language and page. In this way, there can be added flexibility later to make more interesting queries which allow for aggregating data across specific periods of time (e.g. the whole month of January 2014, the whole year of 2009) for a particular page.
+
+## Usage
 
 First, let's open an iex session which will get the application up and running:
 
