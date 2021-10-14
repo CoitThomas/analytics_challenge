@@ -4,6 +4,7 @@
 
 This project acts as a pipeline for storing and analyzing a small dataset from Wikipedia's publicly
 available server logs found here: http://dumps.wikimedia.org/other/pagecounts-raw
+
 Upon storage of the dataset, the project can be used to find the 10 most popular Wikipedia pages, by
 lanuage, for any arbitrary date and hour chosen.
 
@@ -51,7 +52,9 @@ AnalyticsChallenge is an OTP Elixir application with the following supervision t
 ![AnalyticsChallenge Supervision Tree](https://github.com/CoitThomas/analytics_challenge/blob/master/images/supervision_tree.png)
 
 **AnalyticsChallenge.Loader**: Makes HTTP requests to Wikipedia for the raw pagecounts data, processes the data, and loads it into the database.
+
 **AnalyticsChallenge.Repo**: Runs, maintains, and interacts with the database.
+
 **AnalyticsChallenge.Writer**: Queries the database and writes the data out to a CSV file.
 
 ### Usage
@@ -76,7 +79,7 @@ All done? Do you see the `:ok` atom? Want to take a detour for a second and veri
 
     iex(3)> AnalyticsChallenge.Query.row_count()
 
-Assuming they all made it, let's move on to the **Writer** process. There are two options for queries and the subsequent file they produce:
+Assuming they all made it, let's move on to the **Writer** process. There are two options for queries and the subsequent files they produce:
 1. `top_ten_for_all_at_hour/1` - this will fetch the top ten most popular Wikipedia pages for the desired hour for *all* languages in the database
 2. `top_ten_for_subset_at_hour/2` - this will fetch the top ten most popular Wikipedia pages for a subset of chosen languages. You'll need to know the corresponding ISO 639-1, ISO 639-2, or ISO 639-3 language codes first.
 
