@@ -5,5 +5,4 @@ config :analytics_challenge, AnalyticsChallenge.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  pool_size: 20,
-  queue_target: 5000
+  after_connect_timeout: 30000
