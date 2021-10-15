@@ -78,7 +78,7 @@ First, let's open an iex session which will get the application up and running:
 
     $ iex -S mix
 
-Next, pick any date that falls within the range listed at the top of the README and form it into a `NaiveDatetime`:
+Next, pick any date and hour that falls within the range listed at the top of the README and form it into a `NaiveDatetime`. When crafting your NaiveDatetime, keep in mind that 'hour' is the smallest level of granularity for this data set. Including anything other than zeros for the minutes and seconds of the NaiveDatetime will not yield any results:
 
     iex(1)> date_and_hour = ~N[2016-07-01 02:00:00]
 
@@ -86,7 +86,7 @@ With your chosen date and hour in hand, we can now tell the **Loader** to do its
 
     iex(2)> AnalyticsChallenge.Loader.load_pagecounts_for_hour(date_and_hour)
 
-Now would be a good time to go use the restroom or grab some coffee. You *are* inserting millions of rows of data into your database table afterall. Come back in about 5 minutes.
+Now would be a good time to go use the restroom or grab some coffee. You *are* inserting millions of rows of data into your database table afterall. Come back in about 7-8 minutes.
 
 ...
 
@@ -98,13 +98,13 @@ Assuming they all made it, let's move on to the **Writer** process. There are tw
 1. `top_ten_for_all_at_hour/1` - This will fetch the top ten most popular Wikipedia pages for the desired hour for *all* languages in the database.
 2. `top_ten_for_subset_at_hour/2` - This will fetch the top ten most popular Wikipedia pages for a subset of chosen languages. You'll need to know the corresponding ISO 639-1, ISO 639-2, or ISO 639-3 language codes first.
 
-Let's try out the first one first:
+I'm curious about the top ten most popular Wikipedia pages in English and Korean so let's try out the subset query first. The codes for those languages are "en" and "ko":
 
-    iex(4)> AnalyticsChallenge.Writer.top_ten_for_all_at_hour(date_and_hour)
+    iex(4)> AnalyticsChallenge.Writer.top_ten_for_subset_at_hour(["en", "ko"], date_and_hour)
 
-And now the second one. I'm curious about the top ten most popular Wikipedia pages in English and Korean. The codes for those are "en" and "ko":
+And now for the big one. Note, if this happens to timeout on you the first time you run it, try running the command again. It should work the 2nd time:
 
-    iex(5)> AnalyticsChallenge.Writer.top_ten_for_subset_at_hour(["en", "ko"], date_and_hour)
+    iex(5)> AnalyticsChallenge.Writer.top_ten_for_all_at_hour(date_and_hour)
 
 There should now be a newly created `analytics` folder in the root directory of the project with two CSV files inside containing your data. Well done!
 
@@ -117,3 +117,4 @@ These were some remaining things that I would have also liked to do with the pro
 - Create more queries - specifically some centered around aggregating pagecounts to find the top ten pages over various periods of time
 - Find and implement a good Mocks library to use for the http requests
 - DRY out some of the tests
+- Figure out the Postgrex.Protocol pool termination/timeout issue
