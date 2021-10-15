@@ -102,7 +102,7 @@ I'm curious about the top ten most popular Wikipedia pages in English and Korean
 
     iex(4)> AnalyticsChallenge.Writer.top_ten_for_subset_at_hour(["en", "ko"], date_and_hour)
 
-And now for the big one. Note, if this happens to timeout on you the first time you run it, try running the command again. It should work the 2nd time:
+And now for the big one:
 
     iex(5)> AnalyticsChallenge.Writer.top_ten_for_all_at_hour(date_and_hour)
 
@@ -117,4 +117,3 @@ These were some remaining things that I would have also liked to do with the pro
 - Create more queries - specifically some centered around aggregating pagecounts to find the top ten pages over various periods of time
 - Find and implement a good Mocks library to use for the http requests
 - DRY out some of the tests
-- Figure out the Postgrex.Protocol pool termination/timeout issue
